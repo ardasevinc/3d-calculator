@@ -16,6 +16,9 @@
 - ✅ CalculatorButton component with interactions
 - ✅ Calculator logic implementation
 - ✅ Basic styling and materials
+- ✅ Fixed client-side directives for Next.js components
+- ✅ Resolved WebGL context loss issues
+- ✅ Fixed component nesting issues causing rendering errors
 
 ## In Progress
 - ⏳ Improving visual feedback and animations
@@ -33,7 +36,9 @@
 - 📅 Add background/environment to scene
 
 ## Known Issues
-- None documented yet
+- ✅ Next.js client/server component errors (FIXED)
+- ✅ WebGL context loss after initial render (FIXED)
+- None remaining at present
 
 ## Milestones
 - 🎯 **Milestone 1**: ✅ Basic 3D calculator model rendered in isometric view

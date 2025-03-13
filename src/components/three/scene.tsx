@@ -19,6 +19,14 @@ export const Scene = ({ children }: SceneProps) => {
           far: 2000,
         }}
         className="w-full h-full"
+        gl={{ 
+          antialias: true,
+          alpha: false,
+          preserveDrawingBuffer: true,
+          powerPreference: "high-performance" 
+        }}
+        shadows
+        dpr={[1, 2]}
       >
         {/* Set up lights */}
         <ambientLight intensity={0.5} />
