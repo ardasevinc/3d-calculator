@@ -34,6 +34,7 @@
 - Target 60fps for smooth animations
 - Optimize 3D rendering for mobile devices
 - Minimize unnecessary re-renders
+- Prevent excessive component updates causing visual flashing
 
 ### Accessibility
 - Keyboard navigation support
@@ -61,6 +62,40 @@
 - **Camera Settings**:
   - Fixed isometric view
   - Disabled rotation for consistent experience
+
+### Camera Controls (Planned Updates)
+- Enable OrbitControls with:
+  - enableZoom: true (allow zooming with limits)
+  - enablePan: true (allow panning with limits)
+  - enableRotate: true (allow rotation with limits)
+  - dampingFactor: Add damping for smoother controls
+  - minDistance/maxDistance: Set zoom limits
+  - minPolarAngle/maxPolarAngle: Set vertical rotation limits
+  - minAzimuthAngle/maxAzimuthAngle: Set horizontal rotation limits
+
+### Text Rendering (Planned Updates)
+- Improve Text component configuration:
+  - Review position, size, and orientation
+  - Ensure visibility against display background
+  - Consider billboard effect for text always facing camera
+  - Improve number formatting for calculator display
+
+### Background Options (Planned Updates)
+- Options to fix black background:
+  - Enable alpha in WebGL context
+  - Set background color in Canvas component
+  - Add subtle gradient or environment to scene
+  - Consider adding a skybox or background mesh
+
+### Rendering Optimization (Planned Updates)
+- Strategies to fix display flashing:
+  - Implement React.memo() for stable components
+  - Use useCallback for event handlers
+  - Consider useReducer for more predictable state updates
+  - Separate display component from button components
+  - Add useMemo for expensive calculations
+  - Optimize Three.js object updates
+  - Consider HTML overlay for display instead of 3D text
 
 ### State Management
 - React hooks for local component state

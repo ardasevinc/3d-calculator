@@ -23,12 +23,18 @@
 ## In Progress
 - ⏳ Improving visual feedback and animations
 - ⏳ Enhancing lighting and shadows
+- ⏳ Fixing visual issues (black background, input display visibility)
+- ⏳ Improving camera controls for better user interaction
+- ⏳ Optimizing component rendering to prevent flashing
 
 ## Pending Work
+- 📅 Fix black background issue 
+- 📅 Enable camera controls (pan, zoom, rotate)
+- 📅 Fix calculator display text visibility
+- 📅 Optimize rendering to prevent display flashing
 - 📅 Add shadows and improve lighting
 - 📅 Implement button press animations
 - 📅 Add sound effects for interactions
-- 📅 Improve text rendering in display
 - 📅 Add keyboard support
 - 📅 Implement responsive adjustments
 - 📅 Add accessibility features
@@ -38,7 +44,10 @@
 ## Known Issues
 - ✅ Next.js client/server component errors (FIXED)
 - ✅ WebGL context loss after initial render (FIXED)
-- None remaining at present
+- ⚠️ Black background instead of expected light background
+- ⚠️ Camera controls (pan, zoom, rotate) are disabled
+- ⚠️ Calculator display text not visible when entering numbers
+- ⚠️ Excessive re-rendering causing display numbers to flash when buttons are clicked
 
 ## Milestones
 - 🎯 **Milestone 1**: ✅ Basic 3D calculator model rendered in isometric view
