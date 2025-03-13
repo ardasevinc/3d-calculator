@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useCallback, memo } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Text } from '@react-three/drei';
 import { Group } from 'three';
@@ -16,7 +16,7 @@ interface CalculatorButtonProps {
   depth?: number;
 }
 
-export const CalculatorButton = ({
+const CalculatorButtonComponent = ({
   position,
   label,
   color = '#f0f0f0',
@@ -41,23 +41,23 @@ export const CalculatorButton = ({
     }
   });
 
-  const handlePointerDown = () => {
+  const handlePointerDown = useCallback(() => {
     setPressed(true);
-  };
+  }, []);
 
-  const handlePointerUp = () => {
+  const handlePointerUp = useCallback(() => {
     setPressed(false);
     onClick();
-  };
+  }, [onClick]);
 
-  const handlePointerOver = () => {
+  const handlePointerOver = useCallback(() => {
     setHovered(true);
-  };
+  }, []);
 
-  const handlePointerOut = () => {
+  const handlePointerOut = useCallback(() => {
     setHovered(false);
     setPressed(false);
-  };
+  }, []);
 
   return (
     <group position={position}>
@@ -91,4 +91,7 @@ export const CalculatorButton = ({
       </group>
     </group>
   );
-}; 
+};
+
+export const CalculatorButton = memo(CalculatorButtonComponent);
+CalculatorButton.displayName = 'CalculatorButton'; 
