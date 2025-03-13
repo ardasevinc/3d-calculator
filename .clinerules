@@ -1,0 +1,28 @@
+# 3D Calculator Project Rules
+
+## File Structure
+- Use kebab-case for filenames
+- Use PascalCase for component names
+- Prefer named exports unless it's a page component (Next.js routes)
+
+## Component Organization
+- 3D components in `src/components/three`
+- UI components in `src/components/ui`
+- Shared components in `src/components/shared`
+
+## Styling Conventions
+- Use Tailwind CSS for UI components
+- Use Three.js materials for 3D styling
+- Keep design consistent with a cohesive color palette
+
+## Code Patterns
+- Separate calculator logic from rendering
+- Use custom hooks for reusable logic
+- Implement proper TypeScript typing
+
+## Project-Specific Conventions
+- Use isometric camera setup for all 3D scenes
+- Keep 3D assets simple and performant
+- Ensure all interactive elements have proper feedback
+- Follow accessibility best practices even for 3D interfaces 
+- use bun instead of npm.
