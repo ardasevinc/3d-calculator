@@ -1,3 +1,5 @@
+"use client";
+
 import { useCalculator } from '@/hooks/use-calculator';
 import { CalculatorButton } from './calculator-button';
 import { Scene } from './scene';

@@ -1,9 +1,11 @@
+"use client";
+
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { ReactNode } from 'react';
 
 interface SceneProps {
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 export const Scene = ({ children }: SceneProps) => {
