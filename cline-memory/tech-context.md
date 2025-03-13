@@ -2,10 +2,6 @@
 
 ## Core Technologies
 
-### Package Manager
-
-- Bun v1.x
-
 ### Frontend Framework
 - **React 19**: Latest version with improved performance features
 - **Next.js 15**: For server-side rendering and optimized production builds
@@ -14,11 +10,11 @@
 ### 3D Technologies
 - **Three.js**: Core 3D library for creating and displaying 3D content
 - **React Three Fiber**: React reconciler for Three.js
-- **@react-three/drei**: Useful helpers for common Three.js scenarios (optional)
+- **@react-three/drei**: For useful helpers like Text and OrbitControls
 
 ### Styling
 - **Tailwind CSS 4**: For styling 2D UI elements and layout
-- **Custom Three.js Materials**: For 3D element styling
+- **Three.js Materials**: Standard materials for 3D elements
 
 ## Development Environment
 - **Next.js Dev Server**: With Turbopack for faster development
@@ -47,6 +43,7 @@
 - Next.js
 - Three.js
 - React Three Fiber
+- @react-three/drei
 - TypeScript
 - Tailwind CSS
 

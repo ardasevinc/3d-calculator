@@ -1,39 +1,51 @@
 # Active Context
 
 ## Current Focus
-We are starting the development of a 3D calculator using Three.js with an isometric view. The project is in the initial setup phase.
+We have implemented the core components of the 3D calculator:
+- Scene component with isometric camera setup
+- Calculator component with 3D layout
+- Interactive 3D buttons with hover and press animations
+- Calculator logic using custom hooks
 
 ## Recent Changes
-- Created project structure using Next.js 15
-- Set up Three.js and React Three Fiber dependencies
-- Initialized memory files for the project
+- Created Scene component with fixed isometric camera view
+- Implemented Calculator component with 3D layout and materials
+- Created CalculatorButton component with interactive states
+- Set up calculator logic with useCalculator hook
+- Updated main page to display the calculator
 
 ## Current Status
-- Project initialized with basic Next.js setup
-- Core dependencies installed
-- Memory documentation created
+- Basic 3D calculator structure is implemented
+- Core calculator functionality is working
+- Interactive 3D buttons with visual feedback
+- Isometric camera view is fixed and working
 
 ## Active Decisions
-1. **Component Structure**: Planning the hierarchy of React and Three.js components
-2. **Calculator Logic**: Determining how to implement calculator functionality
-3. **3D Design**: Deciding on the visual style and layout of the 3D calculator
-4. **Interaction Model**: Designing how users will interact with 3D buttons
+1. **Camera Setup**: Using fixed isometric view with disabled controls for consistent perspective
+2. **Button Layout**: Standard calculator layout with 3D buttons
+3. **Visual Design**: Modern calculator style with:
+   - Light gray body
+   - Black display
+   - Orange operator buttons
+   - Gray function buttons
+   - White number buttons
+4. **Interaction Model**: 3D buttons with hover and press animations
 
 ## Next Steps
 
 ### Immediate Tasks
-1. Create a basic 3D scene with isometric camera setup
-2. Implement a simple calculator layout in 3D
-3. Create interactive 3D buttons
-4. Implement calculator logic
+1. Add shadows and improve lighting
+2. Implement button press animations
+3. Add sound effects for interactions
+4. Improve text rendering in display
 
 ### Secondary Tasks
-1. Refine visual design and materials
-2. Add animations for button presses
-3. Implement responsive adjustments
-4. Add sound effects for interactions
+1. Add keyboard support
+2. Implement responsive adjustments
+3. Add accessibility features
+4. Optimize performance
 
 ## Open Questions
-- What specific visual style should the calculator have? (modern, retro, futuristic, etc.)
-- Should we implement extended calculator functions beyond basic arithmetic?
-- Do we need to implement keyboard support for calculator input? 
+- Should we add more visual feedback for operations?
+- Do we need to implement extended calculator functions?
+- Should we add a background or environment to the scene? 
