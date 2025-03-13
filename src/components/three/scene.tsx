@@ -10,7 +10,7 @@ interface SceneProps {
 
 export const Scene = ({ children }: SceneProps) => {
   return (
-    <div className="w-full h-full">
+    <div className="fixed inset-0 w-full h-screen overflow-hidden">
       <Canvas
         camera={{
           position: [10, 10, 10],
@@ -27,7 +27,7 @@ export const Scene = ({ children }: SceneProps) => {
         }}
         shadows
         dpr={[1, 2]}
-        style={{ background: '#ffffff' }}
+        style={{ background: '#000000' }}
       >
         {/* Set up lights */}
         <ambientLight intensity={0.5} />
