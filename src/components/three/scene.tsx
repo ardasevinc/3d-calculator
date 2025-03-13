@@ -27,6 +27,7 @@ export const Scene = ({ children }: SceneProps) => {
         }}
         shadows
         dpr={[1, 2]}
+        style={{ background: '#ffffff' }}
       >
         {/* Set up lights */}
         <ambientLight intensity={0.5} />
@@ -34,9 +35,16 @@ export const Scene = ({ children }: SceneProps) => {
         
         {/* Set up isometric camera controls */}
         <OrbitControls 
-          enableZoom={false} 
-          enablePan={false} 
-          enableRotate={false}
+          enableZoom={true}
+          enablePan={true}
+          enableRotate={true}
+          minDistance={5}
+          maxDistance={20}
+          minPolarAngle={Math.PI / 4}
+          maxPolarAngle={Math.PI / 2}
+          minAzimuthAngle={-Math.PI / 4}
+          maxAzimuthAngle={Math.PI / 4}
+          dampingFactor={0.1}
           target={[0, 0, 0]}
         />
         

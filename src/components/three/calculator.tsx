@@ -4,7 +4,7 @@ import { useCalculator } from '@/hooks/use-calculator';
 import { CalculatorButton } from './calculator-button';
 import { Scene } from './scene';
 import { Text } from '@react-three/drei';
-import { Suspense } from 'react';
+import { Suspense, useCallback } from 'react';
 
 export const Calculator = () => {
   const {
@@ -26,6 +26,30 @@ export const Calculator = () => {
     ['±', '0', '.', '='],
   ];
 
+  const getOnClick = useCallback((label: string) => {
+    switch (label) {
+      case 'C':
+        return clearAll;
+      case 'CE':
+        return clearEntry;
+      case '±':
+        return toggleSign;
+      case '%':
+        return inputPercent;
+      case '.':
+        return inputDecimal;
+      case '=':
+        return () => performOperation(null);
+      case '+':
+      case '-':
+      case '*':
+      case '/':
+        return () => performOperation(label as '+' | '-' | '*' | '/');
+      default:
+        return () => inputDigit(label);
+    }
+  }, [clearAll, clearEntry, inputDecimal, inputDigit, inputPercent, performOperation, toggleSign]);
+
   const CalculatorContent = () => (
     <group position={[0, 0, 0]}>
       {/* Calculator body */}
@@ -42,7 +66,7 @@ export const Calculator = () => {
 
       {/* Display text */}
       <Text
-        position={[0, 3, 0.27]}
+        position={[2, 3, 0.35]}
         fontSize={0.8}
         color="white"
         anchorX="right"
@@ -59,37 +83,6 @@ export const Calculator = () => {
           const isOperator = ['+', '-', '*', '/', '='].includes(label);
           const isClear = label === 'C' || label === 'CE';
 
-          const handleClick = () => {
-            switch (label) {
-              case 'C':
-                clearAll();
-                break;
-              case 'CE':
-                clearEntry();
-                break;
-              case '±':
-                toggleSign();
-                break;
-              case '%':
-                inputPercent();
-                break;
-              case '.':
-                inputDecimal();
-                break;
-              case '=':
-                performOperation(null);
-                break;
-              case '+':
-              case '-':
-              case '*':
-              case '/':
-                performOperation(label as '+' | '-' | '*' | '/');
-                break;
-              default:
-                inputDigit(label);
-            }
-          };
-
           return (
             <CalculatorButton
               key={`${rowIndex}-${colIndex}`}
@@ -97,7 +90,7 @@ export const Calculator = () => {
               label={label}
               color={isOperator ? '#ff9500' : isClear ? '#a5a5a5' : '#f0f0f0'}
               hoverColor={isOperator ? '#ffaa33' : isClear ? '#b5b5b5' : '#e0e0e0'}
-              onClick={handleClick}
+              onClick={getOnClick(label)}
               width={1.2}
               height={1.2}
             />

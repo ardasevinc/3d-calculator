@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
 type OperationType = '+' | '-' | '*' | '/' | null;
 
@@ -19,114 +19,118 @@ export const useCalculator = () => {
     waitingForOperand: false,
   });
 
-  const clearAll = () => {
+  const clearAll = useCallback(() => {
     setState({
       displayValue: '0',
       previousValue: null,
       operation: null,
       waitingForOperand: false,
     });
-  };
+  }, []);
 
-  const clearEntry = () => {
-    setState({
-      ...state,
+  const clearEntry = useCallback(() => {
+    setState(prevState => ({
+      ...prevState,
       displayValue: '0',
+    }));
+  }, []);
+
+  const inputDigit = useCallback((digit: string) => {
+    setState(prevState => {
+      const { displayValue, waitingForOperand } = prevState;
+      if (waitingForOperand) {
+        return {
+          ...prevState,
+          displayValue: digit,
+          waitingForOperand: false,
+        };
+      } else {
+        return {
+          ...prevState,
+          displayValue: displayValue === '0' ? digit : displayValue + digit,
+        };
+      }
     });
-  };
+  }, []);
 
-  const inputDigit = (digit: string) => {
-    const { displayValue, waitingForOperand } = state;
-
-    if (waitingForOperand) {
-      setState({
-        ...state,
-        displayValue: digit,
-        waitingForOperand: false,
-      });
-    } else {
-      setState({
-        ...state,
-        displayValue: displayValue === '0' ? digit : displayValue + digit,
-      });
-    }
-  };
-
-  const inputDecimal = () => {
-    const { displayValue, waitingForOperand } = state;
-
-    if (waitingForOperand) {
-      setState({
-        ...state,
-        displayValue: '0.',
-        waitingForOperand: false,
-      });
-      return;
-    }
-
-    if (!displayValue.includes('.')) {
-      setState({
-        ...state,
-        displayValue: displayValue + '.',
-      });
-    }
-  };
-
-  const toggleSign = () => {
-    const { displayValue } = state;
-    const newValue = parseFloat(displayValue) * -1;
-
-    setState({
-      ...state,
-      displayValue: String(newValue),
+  const inputDecimal = useCallback(() => {
+    setState(prevState => {
+      const { displayValue, waitingForOperand } = prevState;
+      if (waitingForOperand) {
+        return {
+          ...prevState,
+          displayValue: '0.',
+          waitingForOperand: false,
+        };
+      }
+      if (!displayValue.includes('.')) {
+        return {
+          ...prevState,
+          displayValue: displayValue + '.',
+        };
+      }
+      return prevState;
     });
-  };
+  }, []);
 
-  const inputPercent = () => {
-    const { displayValue } = state;
-    const value = parseFloat(displayValue);
-    
-    setState({
-      ...state,
-      displayValue: String(value / 100),
+  const toggleSign = useCallback(() => {
+    setState(prevState => {
+      const { displayValue } = prevState;
+      const newValue = parseFloat(displayValue) * -1;
+      return {
+        ...prevState,
+        displayValue: String(newValue),
+      };
     });
-  };
+  }, []);
 
-  const performOperation = (nextOperation: OperationType) => {
-    const { displayValue, previousValue, operation } = state;
-    const inputValue = parseFloat(displayValue);
+  const inputPercent = useCallback(() => {
+    setState(prevState => {
+      const { displayValue } = prevState;
+      const value = parseFloat(displayValue);
+      return {
+        ...prevState,
+        displayValue: String(value / 100),
+      };
+    });
+  }, []);
 
-    if (previousValue === null) {
-      setState({
-        ...state,
-        previousValue: inputValue,
+  const performOperation = useCallback((nextOperation: OperationType) => {
+    setState(prevState => {
+      const { displayValue, previousValue, operation } = prevState;
+      const inputValue = parseFloat(displayValue);
+
+      if (previousValue === null) {
+        return {
+          ...prevState,
+          previousValue: inputValue,
+          operation: nextOperation,
+          waitingForOperand: true,
+        };
+      }
+
+      let newValue: number;
+      if (operation === '+') {
+        newValue = previousValue + inputValue;
+      } else if (operation === '-') {
+        newValue = previousValue - inputValue;
+      } else if (operation === '*') {
+        newValue = previousValue * inputValue;
+      } else if (operation === '/') {
+        newValue = previousValue / inputValue;
+      } else {
+        newValue = inputValue;
+      }
+
+      return {
+        ...prevState,
+        displayValue: String(newValue),
+        previousValue: nextOperation ? newValue : null,
         operation: nextOperation,
-        waitingForOperand: true,
-      });
-      return;
-    }
-
-    let newValue: number;
-    if (operation === '+') {
-      newValue = previousValue + inputValue;
-    } else if (operation === '-') {
-      newValue = previousValue - inputValue;
-    } else if (operation === '*') {
-      newValue = previousValue * inputValue;
-    } else if (operation === '/') {
-      newValue = previousValue / inputValue;
-    } else {
-      newValue = inputValue;
-    }
-
-    setState({
-      ...state,
-      displayValue: String(newValue),
-      previousValue: nextOperation ? newValue : null,
-      operation: nextOperation,
-      waitingForOperand: Boolean(nextOperation),
+        waitingForOperand: Boolean(nextOperation),
+      };
     });
-  };
+  }, []);
 
   return {
     displayValue: state.displayValue,
